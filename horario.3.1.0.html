@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Horario</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital@1&display=swap" rel="stylesheet">
+    
+    <style>
+
+/**************** **************** Configuracion General   **************** ****************/
+* {
+    box-sizing: border-box;
+    padding: 0; margin: 0;
+    
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 20px;
+
+    user-select: none;
+}
+
+:root{
+    --clr: rgb(0, 236, 243);
+    --clr: rgb(218, 17, 123);
+    --clr: rgb(29, 27, 51);
+
+    --clr-f-body: linear-gradient(to bottom, rgba(29, 27, 51), rgba(29, 27, 51, .85));
+
+    --clr-f-container1: linear-gradient(to bottom, rgba(218, 17, 123, .2), rgba(218, 17, 123, .1));
+    --clr-border-container1: rgb(218, 17, 123);
+
+    --clr-f-items: rgba(29, 27, 51, .7);
+    --clr-fh-items: linear-gradient(to bottom, rgba(29, 27, 51, .7), rgba(218, 17, 123, .3));
+
+    --clr-f-cont_scroll-cont1: linear-gradient(to left, rgba(218, 17, 123, .1), rgba(218, 17, 123, .15));
+    --clr-fh-scroll-cont1: linear-gradient(to left,  rgba(218, 17, 123, .7), rgba(218, 17, 123, .5));
+    --clr-f-scroll-cont1: linear-gradient(to left, rgba(218, 17, 123, .6), rgba(218, 17, 123, .4));
+
+    --clr-txt: rgb(241, 204, 241);
+    --clr-txt-info: rgba(220, 230, 240, .9);
+
+    --clr-h-txt: rgb(247, 196, 242);
+}
+
+body {
+    background: var(--clr-f-body);
+}
+
+/**************** **************** Configuracion Contenedor1 **************** ****************/
+.cont1 {
+    width: 90%; 
+    max-width: 950px;
+
+    padding: 20px; margin: 20px auto;
+
+    background: var(--clr-f-container1);
+    border: 2px solid var(--clr-border-container1);
+    border-radius: 10px 40px 10px 40px;
+    margin: auto; margin-top: 20px;
+    overflow-x: scroll;
+}
+
+.cont1::-webkit-scrollbar {
+    height: 20px;
+}
+
+.cont1::-webkit-scrollbar-track {
+    background: var(--clr-f-cont_scroll-cont1);
+    border-radius: 15px 15px 0px 0px;
+    margin: 0px 30px;
+}
+
+.cont1::-webkit-scrollbar-thumb {
+    background: var(--clr-f-scroll-cont1);
+    border-radius: 15px 15px 0px 0px;
+}
+
+.cont1::-webkit-scrollbar-thumb:hover {
+    background: var(--clr-fh-scroll-cont1);
+}
+
+.table-schedule {
+    margin-top: 35px;
+    display: grid;
+
+    grid-template-columns: repeat(6, 150px);
+    grid-template-rows: repeat(8, 40px);
+}
+
+.text-title {
+    font-size: 30px; margin: 20px 10px;
+    grid-column: 1 / span 6;
+    
+    color: var(--clr-border-container1);
+    position: absolute;
+    top: 10px;
+}
+
+.b { font-size: 12px; }
+.dias { font-weight:bold; }
+.hrs { text-decoration: underline; }
+
+.cont1__items {
+    padding: 5px; margin: 2px; 
+    border-radius: 5px;
+    text-align: center;
+    font-size: 18px;
+
+    background: var(--clr-f-items);
+    color: var(--clr-txt);
+}
+
+.cont1__items:hover {
+    background: var(--clr-fh-items);
+    color: var(--clr-h-txt);
+}
+
+.relleno {
+    grid-column: 1 / span 6;
+    width: 100%; height: 2px;
+    background-color: transparent;
+}
+
+.vie, .des { margin-right: 20px; }
+.des { grid-column: 1 / span 6; }
+
+/**************** **************** Configuracion Contenedor2 **************** ****************/
+.cont2 {
+    width: 90%;  max-width: 700px;
+    padding: 10px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 70px 240px 100px 50px;
+
+    background: var(--clr-f-container1);
+    color: var(--clr-border-container1);
+    border: 2px solid var(--clr-border-container1);
+
+    border-radius: 10px 40px 10px 40px;
+    margin: 20px auto;
+}
+
+.cont2__jornada { font-size: 24px; }
+
+.cont2__version { 
+    text-align: right; margin-right: 10px;
+    font-size: 15px;
+}
+.cont2__hours { 
+    height: 80px;
+
+    display: flex; flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    grid-column: 1 / span 2; 
+}
+
+.cont2__hours div {
+    text-align: center;
+    margin: 5px; padding: 10px;
+    background: var(--clr-f-items);
+    color: var(--clr-txt);
+    border-radius: 10px;
+}
+
+.cont2__hours div:hover {
+    background: var(--clr-fh-items);
+    color: var(--clr-h-txt);
+}
+
+.cont2__name, .cont2__grade {
+    color: var(--clr-txt-info); width: 100%;
+    align-self: center; text-align: center;
+}
+
+.cont2__name:hover, .cont2__grade:hover {
+    text-shadow: 0px 0px 10px var(--clr-border-container1);
+}
+
+.cont2__author:hover, .cont2__colegio:hover {
+    text-shadow: 0px 0px 10px var(--clr-border-container1);
+}
+
+.cont2__author, .cont2__colegio {
+    color: var(--clr-border-container);
+    font-size: 18px; text-align: right;
+}
+
+.cont2__author {  
+    /* Desde la linea 1 ocupa 3 columnas */
+    grid-column: 1 / span 1;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.cont2__colegio {
+    grid-column: 2 / 3;
+    text-align: right;
+}
+/**************** **************** Responsive Design Contenedor2 **************** ****************/
+@media screen and (min-width: 400px) {
+    .cont2 {
+        grid-template-rows: 40px 150px 100px 50px;
+    }
+}
+
+@media screen and (min-width: 685px) {
+    .cont2 {
+        grid-template-rows: 40px 60px 80px 30px;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <!-------------- -------------- Configuracion Contenedor1   -------------- -------------->
+    <div class="cont1">
+        <h1 class="text-title">Horario 2024</h1>
+        
+        <div class="table-schedule">
+            <div class="cont1__items dias">Dias</div>
+            <div class="cont1__items dias lun">lunes</div>
+            <div class="cont1__items dias mar">martes</div>
+            <div class="cont1__items dias mie">miercoles</div>
+            <div class="cont1__items dias jue">jueves</div>
+            <div class="cont1__items dias vie">viernes</div>
+            
+            <div class="cont1__items hr-1 hrs">hr 1</div>
+            <div class="cont1__items hr-1 lun"><b class="b">18-</b>Etica</div>
+            <div class="cont1__items hr-1 mar"><b class="b">19-</b>Español</div>
+            <div class="cont1__items hr-1 mie"><b class="b">24-</b>Sociales</div>
+            <div class="cont1__items hr-1 jue"><b class="b">18-</b>Religion</div>
+            <div class="cont1__items hr-1 vie"><b class="b">12-</b>Biologia</div>
+            
+            <div class="cont1__items hr-2 hrs">hr 2</div>
+            <div class="cont1__items hr-2 lun"><b class="b">18-</b>Etica</div>
+            <div class="cont1__items hr-2 mar"><b class="b">19-</b>Español</div>
+            <div class="cont1__items hr-2 mie"><b class="b">24-</b>Sociales</div>
+            <div class="cont1__items hr-2 jue"><b class="b">18-</b>Religion</div>
+            <div class="cont1__items hr-2 vie"><b class="b">12-</b>Quimica</div>
+            
+            <div class="cont1__items hr-3 hrs">hr 3</div>
+            <div class="cont1__items hr-3 lun"><b class="b">24-</b>Sociales</div>
+            <div class="cont1__items hr-3 mar"><b class="b">24-</b>Sciales</div>
+            <div class="cont1__items hr-3 mie"><b class="b">17-</b>Math</div>
+            <div class="cont1__items hr-3 jue"><b class="b">17-</b>Math</div>
+            <div class="cont1__items hr-3 vie"><b class="b">17-</b>Math</div>
+
+            <div class="cont1__items hr-4 hrs">hr 4</div>
+            <div class="cont1__items hr-4 lun"><b class="b">19-</b>Ingles</div>
+            <div class="cont1__items hr-4 mar"><b class="b">16-</b>Fisica</div>
+            <div class="cont1__items hr-4 mie"><b class="b">17-</b>Math</div>
+            <div class="cont1__items hr-4 jue"><b class="b">17-</b>Math</div>
+            <div class="cont1__items hr-4 vie"><b class="b">18-</b>Etica</div>
+            
+            <div class="cont1__items des">Des</div>
+            
+            <div class="cont1__items hr-5 hrs">hr 5</div>
+            <div class="cont1__items hr-5 lun"><b class="b">00-</b>E. Fisica</div>
+            <div class="cont1__items hr-5 mar"><b class="b">12-</b>Biologia</div>
+            <div class="cont1__items hr-5 mie"><b class="b">16-</b>T-Informatica</div>
+            <div class="cont1__items hr-5 jue"><b class="b">19-</b>Español</div>
+            <div class="cont1__items hr-5 vie"><b class="b">19-</b>Ingles</div>
+
+            <div class="cont1__items hr-6 hrs">hr 6</div>
+            <div class="cont1__items hr-6 lun"><b class="b">00-</b>E. Fisica</div>
+            <div class="cont1__items hr-6 mar"><b class="b">12-</b>Biologia</div>
+            <div class="cont1__items hr-6 mie"><b class="b">16-</b>T-Informatica</div>
+            <div class="cont1__items hr-6 jue"><b class="b">19-</b>Español</div>
+            <div class="cont1__items hr-6 vie"><b class="b">24-</b>Sociales</div>
+            
+            <div class="relleno"></div>
+        </div>
+    </div>
+
+    <!-------------- -------------- Configuracion Contenedor2   -------------- -------------->
+    <div class="cont2">
+        <p class="cont2__jornada">Jornada Tarde</p>
+        <p class="cont2__version">Version: 3.0.0</p>
+        
+        <div class="cont2__hours">
+            <div> <p>hr 1</p> <p>12:30</p> </div>
+            <div> <p>hr 3</p> <p>02:20</p> </div>
+            <div> <p>hr 4</p> <p>03:15</p> </div>
+            <div> <p>hr-D</p> <p>04:10</p> </div>
+            <div> <p>hr 5</p> <p>04:40</p> </div>
+            <div> <p>hr 6</p> <p>05:34</p> </div>
+            <div> <p>hr-S</p> <p>06:30</p> </div>
+        </div>
+        
+        <p class="cont2__name"><b>Name:</b> Francisco J. Velez O.</p>
+        <p class="cont2__grade"><b>Grade:</b> 901</p>
+
+        <div class="cont2__author">Author: FraVelz </div>
+        <div class="cont2__colegio">IED Montebello, Bogota-Colombia</div>
+    </div>
+</body>
+
+</html>
+
+<!--* Author: FraVelz -->
