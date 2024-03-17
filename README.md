@@ -12,7 +12,9 @@
 
 ![Image 4](./images/index2-pc.png)
 
+link: [Go to the website.](https://fravelz.github.io/Web-School_schedule/)
 
-> Author: Francisco Vélez | FraVelz
+**Best regard !!!**
 
-Best regard :)
+<cite>Author: Francisco Velez</cite>
+
